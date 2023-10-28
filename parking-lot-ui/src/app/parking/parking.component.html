@@ -1,0 +1,13 @@
+<div>
+    <h2>Park a Car</h2>
+    <form (submit)="parkCar()">
+      <label for="registrationNumber">Registration Number:</label>
+      <input type="text" id="registrationNumber" [(ngModel)]="registrationNumber" name="registrationNumber" required>
+      <br>
+      <label for="color">Color:</label>
+      <input type="text" id="color" [(ngModel)]="color" name="color" required>
+      <br>
+      <button type="submit">Park Car</button>
+    </form>
+</div>
+  

@@ -1,0 +1,10 @@
+<div>
+    <h2>Search for Cars</h2>
+    <form (submit)="searchCarsByColor()">
+      <label for="searchColor">Search by Color:</label>
+      <input type="text" id="searchColor" [(ngModel)]="searchColor" name="searchColor" required>
+      <br>
+      <button type="submit">Search</button>
+    </form>
+</div>
+  
