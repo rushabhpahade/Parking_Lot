@@ -7,15 +7,19 @@ import { CarService } from '../car.service';
   styleUrls: ['./search.component.css']
 })
 export class SearchComponent {
-  searchColor: string ='';
+  searchColor: string = '';
+  searchResults: any[] = []; // Store search results here
 
   constructor(private carService: CarService) {}
 
   searchCarsByColor() {
-    this.carService.searchCarsByColor(this.searchColor).subscribe(response => {
-      console.log('Cars of color ' + this.searchColor + ':', response);
-    }, error => {
-      console.error('Error searching for cars:', error);
-    });
+    this.carService.searchCarsByColor(this.searchColor).subscribe(
+      (response: any) => {
+        this.searchResults = response; // Store the search results
+      },
+      (error) => {
+        console.error('Error searching for cars:', error);
+      }
+    );
   }
 }

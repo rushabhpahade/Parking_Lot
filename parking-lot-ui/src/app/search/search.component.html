@@ -6,5 +6,18 @@
       <br>
       <button type="submit">Search</button>
     </form>
-</div>
-  
+    
+    <div *ngIf="searchResults && searchResults.length > 0">
+      <h3>Search Results:</h3>
+      <ul>
+        <li *ngFor="let car of searchResults">
+          <p>Registration Number: {{ car.registrationNumber }}</p>
+          <p>Color: {{ car.color }}</p>
+          <!-- Add more fields as needed -->
+        </li>
+      </ul>
+    </div>
+    <div *ngIf="searchResults && searchResults.length === 0">
+      <p>No cars found with the specified color.</p>
+    </div>
+  </div>
