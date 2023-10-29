@@ -7,11 +7,11 @@ import jakarta.persistence.Id;
 
 @Entity
 public class ParkingSpot {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    private boolean occupied;
+	private boolean occupied;
 
 	public Long getId() {
 		return id;
