@@ -1,0 +1,23 @@
+<div>
+    <h2>Search for Cars</h2>
+    <form (submit)="searchCarsByColor()">
+      <label for="searchColor">Search by Color:</label>
+      <input type="text" id="searchColor" [(ngModel)]="searchColor" name="searchColor" required>
+      <br>
+      <button type="submit">Search</button>
+    </form>
+    
+    <div *ngIf="searchResults && searchResults.length > 0">
+      <h3>Search Results:</h3>
+      <ul>
+        <li *ngFor="let car of searchResults">
+          <p>Registration Number: {{ car.registrationNumber }}</p>
+          <p>Color: {{ car.color }}</p>
+          <!-- Add more fields as needed -->
+        </li>
+      </ul>
+    </div>
+    <div *ngIf="searchResults && searchResults.length === 0">
+      <p>No cars found with the specified color.</p>
+    </div>
+  </div>
