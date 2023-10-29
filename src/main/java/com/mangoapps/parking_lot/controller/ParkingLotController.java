@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.mangoapps.parking_lot.model.Car;
 import com.mangoapps.parking_lot.model.ParkingSpot;
 import com.mangoapps.parking_lot.model.Ticket;
+import com.mangoapps.parking_lot.repository.CarRepository;
 import com.mangoapps.parking_lot.repository.ParkingSpotRepository;
+import com.mangoapps.parking_lot.repository.TicketRepository;
 import com.mangoapps.parking_lot.service.CarService;
 import com.mangoapps.parking_lot.service.TicketService;
 
@@ -32,11 +34,19 @@ public class ParkingLotController {
     private TicketService ticketService;
     @Autowired
     private ParkingSpotRepository parkingSpotRepository;
+    @Autowired
+    private TicketRepository ticketRepository;
+    @Autowired
+    private CarRepository carRepository;
+    
     
     @PostMapping("/createParkingLot")
     public ResponseEntity<String> createParkingLot(@RequestParam int size) {
     	 parkingSpotRepository.deleteAll();
-
+    	 parkingSpotRepository.deleteAll();
+    	 ticketRepository.deleteAll();
+    	 carRepository.deleteAll();
+    	 parkedRegistrationNumbers.clear();
          // Create parking Lot of size 
          for (int i = 0; i < size; i++) {
              ParkingSpot spot = new ParkingSpot();
