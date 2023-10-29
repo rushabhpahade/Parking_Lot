@@ -7,11 +7,11 @@ import jakarta.persistence.Id;
 
 @Entity
 public class Car {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String registrationNumber;
-    private String color;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	private String registrationNumber;
+	private String color;
 	public Long getId() {
 		return id;
 	}
@@ -30,5 +30,5 @@ public class Car {
 	public void setColor(String color) {
 		this.color = color;
 	}
-    
+
 }

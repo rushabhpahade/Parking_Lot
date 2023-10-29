@@ -4,19 +4,19 @@ import jakarta.persistence.*;
 
 @Entity
 public class Ticket {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @OneToOne
-    @JoinColumn(name = "car_id")
-    private Car car;
+	@OneToOne
+	@JoinColumn(name = "car_id")
+	private Car car;
 
-    @Column(name = "occupied")
-    private int occupied; 
+	@Column(name = "occupied")
+	private int occupied; 
 
-    @Column(name = "spot_number", nullable = false)
-    private Long spotNumber;
+	@Column(name = "spot_number", nullable = false)
+	private Long spotNumber;
 
 	public Long getId() {
 		return id;

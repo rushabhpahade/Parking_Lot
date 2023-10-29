@@ -10,25 +10,25 @@ import com.mangoapps.parking_lot.repository.CarRepository;
 
 @Service
 public class CarService {
-    @Autowired
-    private CarRepository carRepository;
+	@Autowired
+	private CarRepository carRepository;
 
-    public List<Car> getCarsByColor(String color) {
-        return carRepository.findByColor(color);
-    }
+	public List<Car> getCarsByColor(String color) {
+		return carRepository.findByColor(color);
+	}
 
-    public List<Car> getCarByRegistrationNumber(String registrationNumber) {
-        return carRepository.findByRegistrationNumber(registrationNumber);
-    }
-    public List<Car> getAllCars() {
-        return carRepository.findAll();
-    }
-    public Car saveCar(Car car) {
-        return carRepository.save(car);
-    }
-    public void deleteCar(Car car) {
-        carRepository.delete(car);
-    }
+	public List<Car> getCarByRegistrationNumber(String registrationNumber) {
+		return carRepository.findByRegistrationNumber(registrationNumber);
+	}
+	public List<Car> getAllCars() {
+		return carRepository.findAll();
+	}
+	public Car saveCar(Car car) {
+		return carRepository.save(car);
+	}
+	public void deleteCar(Car car) {
+		carRepository.delete(car);
+	}
 
 
 }
