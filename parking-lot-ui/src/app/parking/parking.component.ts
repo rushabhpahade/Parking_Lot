@@ -9,12 +9,13 @@ import { CarService } from '../car.service';
 export class ParkingComponent {
   registrationNumber: string ='';
   color: string = '';
-
+  message: string = "";
   constructor(private carService: CarService) {}
 
   parkCar() {
     this.carService.parkCar(this.registrationNumber, this.color).subscribe(response => {
-      console.log('Car parked successfully:', response);
+      this.message = response as string;
+      console.log('Car parked successfully:', this.message);
     }, error => {
       console.error('Error parking car:', error);
     });

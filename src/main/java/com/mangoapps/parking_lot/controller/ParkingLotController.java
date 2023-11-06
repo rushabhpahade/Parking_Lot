@@ -1,8 +1,11 @@
 package com.mangoapps.parking_lot.controller;
 
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,7 +61,7 @@ public class ParkingLotController {
 	}
 
 	@PostMapping("/parkCar")
-	public ResponseEntity< String> parkCar(@RequestParam String registrationNumber, @RequestParam String color) {
+	public ResponseEntity<String> parkCar(@RequestParam String registrationNumber, @RequestParam String color) {
 		ParkingSpot availableSpot = parkingSpotRepository.findFirstByOccupiedFalse();
 		// Validations for RegistrationNumber. It should be of length 9 or 10 only..
 		if (!registrationNumber.matches("^[A-Za-z][A-Za-z0-9]{8,9}$")) {
@@ -84,10 +87,11 @@ public class ParkingLotController {
 			carService.saveCar(car);
 
 			addParkedRegistrationNumber(registrationNumber);
-
 			Ticket ticket = new Ticket();
 			ticket.setSpotNumber(availableSpot.getId());
 			ticket.setCar(car);
+			ticket.setOccupied(true); // Mark the ticket as occupied
+	        ticket.setParkingSpot(availableSpot); // Set the parking spot
 			ticketService.saveTicket(ticket);
 
 			return ResponseEntity.ok("Car parked in spot " + availableSpot.getId());
@@ -107,32 +111,25 @@ public class ParkingLotController {
 	}
 	@PostMapping("/removeCarBySpot")
 	public ResponseEntity<String> removeCarBySpot(@RequestParam long spotNumber) {
-		ParkingSpot spot = parkingSpotRepository.findById(spotNumber).orElse(null);
+	    ParkingSpot spot = parkingSpotRepository.findById(spotNumber).orElse(null);
 
-		if (spot != null && spot.isOccupied()) {
-			// Find the ticket
-			// Logic:- First Delete The Ticket associated with the spot and then delete car since there is a foreign key reference..
-			Ticket ticket = ticketService.getTicketBySpotNumber(spotNumber);
-			if (ticket != null) {
-				// Delete the ticket first
-				ticketService.deleteTicket(ticket);
+	    if (spot != null && spot.isOccupied()) {
+	        // Find the ticket
+	        Ticket ticket = ticketService.getTicketBySpotNumber(spotNumber);
+	        if (ticket != null) {
+	            // Free up the spot
+	            spot.setOccupied(false);
+	            parkingSpotRepository.save(spot);
 
-				// Free up the spot
-				spot.setOccupied(false);
-				parkingSpotRepository.save(spot);
+	            // Mark the ticket as unoccupied
+	            ticket.setOccupied(false);
+	            ticketService.saveTicket(ticket);
 
-				// Find the associated car
-				Car car = ticket.getCar();
-				if (car != null) {
-					// Delete the car
-					carService.deleteCar(car);
-				}
+	            return ResponseEntity.ok("Car removed from spot " + spotNumber);
+	        }
+	    }
 
-				return ResponseEntity.ok("Car removed from spot " + spotNumber);
-			}
-		}
-
-		return ResponseEntity.ok("Spot " + spotNumber + " is empty or doesn't exist.");
+	    return ResponseEntity.ok("Spot " + spotNumber + " is empty or doesn't exist.");
 	}
 
 	@GetMapping("/cars/{color}")
@@ -142,6 +139,23 @@ public class ParkingLotController {
 	@GetMapping("/allCars")
 	public List<Car> getAllCarsInParkingLot() {
 		return carService.getAllCars();
+	}
+	@GetMapping("/parkedCars")
+	public List<Map<String, Object>> getParkedCars() {
+	    List<Object[]> result = ticketService.getParkedCarsInfo();
+
+	    List<Map<String, Object>> parkedCarInfoList = new ArrayList<>();
+
+	    for (Object[] row : result) {
+	        Map<String, Object> carInfo = new HashMap<>();
+	        carInfo.put("car", row[0]);
+	        carInfo.put("parkingSpotNumber", row[1]);
+	        carInfo.put("ticketNumber", row[2]);
+
+	        parkedCarInfoList.add(carInfo);
+	    }
+
+	    return parkedCarInfoList;
 	}
 	@GetMapping("/registrationNumbersByColor")
 	public List<String> getRegistrationNumbersByColor(@RequestParam String color) {

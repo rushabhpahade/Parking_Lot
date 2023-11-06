@@ -1,0 +1,12 @@
+<div>
+    <h2>List of Parked-Cars</h2>
+    <ul>
+      <li *ngFor="let car of cars">
+        <p>Registration Number: {{ car.car.registrationNumber }}</p>
+        <p>Color: {{ car.car.color }}</p>
+        <p>Ticket Number: {{ car.ticketNumber }}</p>
+        <p>Parking Spot Number: {{ car.parkingSpotNumber }}</p>
+      </li>
+    </ul>
+</div>
+  

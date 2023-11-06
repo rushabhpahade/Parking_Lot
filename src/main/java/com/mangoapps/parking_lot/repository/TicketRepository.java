@@ -20,4 +20,7 @@ public interface TicketRepository extends JpaRepository<Ticket, Long> {
 
 	@Query("SELECT t FROM Ticket t WHERE t.spotNumber = :spotNumber")
 	Ticket findBySpotNumber(@Param("spotNumber") Long spotNumber);
+	
+	@Query(value = "SELECT c, t.spotNumber, t.id " + "FROM Car c " + "JOIN Ticket t ON c.id = t.car.id " + "WHERE t.occupied = true")
+	List<Object[]> getParkedCarsInfo();
 }

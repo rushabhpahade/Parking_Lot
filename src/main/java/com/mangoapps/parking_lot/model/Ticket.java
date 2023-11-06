@@ -11,9 +11,13 @@ public class Ticket {
 	@OneToOne
 	@JoinColumn(name = "car_id")
 	private Car car;
+	
+	@ManyToOne
+    @JoinColumn(name = "spot_id")
+    private ParkingSpot parkingSpot;
 
 	@Column(name = "occupied")
-	private int occupied; 
+    private boolean occupied;
 
 	@Column(name = "spot_number", nullable = false)
 	private Long spotNumber;
@@ -34,11 +38,11 @@ public class Ticket {
 		this.car = car;
 	}
 
-	public int getOccupied() {
+	public boolean getOccupied() {
 		return occupied;
 	}
 
-	public void setOccupied(int occupied) {
+	public void setOccupied(boolean occupied) {
 		this.occupied = occupied;
 	}
 
@@ -48,6 +52,14 @@ public class Ticket {
 
 	public void setSpotNumber(Long spotNumber) {
 		this.spotNumber = spotNumber;
+	}
+
+	public ParkingSpot getParkingSpot() {
+		return parkingSpot;
+	}
+
+	public void setParkingSpot(ParkingSpot parkingSpot) {
+		this.parkingSpot = parkingSpot;
 	}
 }
 

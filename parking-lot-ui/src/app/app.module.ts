@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { CarListComponent } from './car-list/car-list.component';
+import { ParkedCarListComponent } from './parking-car-list/parking-car-list.component';
 import { ParkingComponent } from './parking/parking.component';
 import { SearchComponent } from './search/search.component';
 import { FormsModule } from '@angular/forms';
@@ -14,7 +15,8 @@ import { HttpClientModule } from '@angular/common/http';
     AppComponent,
     CarListComponent,
     ParkingComponent,
-    SearchComponent
+    SearchComponent,
+    ParkedCarListComponent
   ],
   imports: [
     BrowserModule,

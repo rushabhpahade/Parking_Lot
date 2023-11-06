@@ -37,5 +37,8 @@ public class TicketService {
     public Ticket getTicketBySpotNumber(Long spotNumber) {
         return ticketRepository.findBySpotNumber(spotNumber);
     }
+    public List<Object[]> getParkedCarsInfo() {
+        return ticketRepository.getParkedCarsInfo();
+    }
 }
 

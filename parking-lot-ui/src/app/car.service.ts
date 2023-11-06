@@ -26,4 +26,7 @@ export class CarService {
   getCarsList() {
     return this.http.get(this.baseUrl + '/allCars');
   }
+  getParkedCarsList(){
+    return this.http.get(this.baseUrl + '/parkedCars');
+  }
 }
