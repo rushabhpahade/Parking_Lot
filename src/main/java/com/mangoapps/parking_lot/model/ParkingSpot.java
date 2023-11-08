@@ -1,5 +1,6 @@
 package com.mangoapps.parking_lot.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -12,6 +13,9 @@ public class ParkingSpot {
 	private Long id;
 
 	private boolean occupied;
+	
+	@Column(name = "maintenance")
+    private boolean maintenance;
 
 	public Long getId() {
 		return id;
@@ -27,6 +31,14 @@ public class ParkingSpot {
 
 	public void setOccupied(boolean occupied) {
 		this.occupied = occupied;
+	}
+
+	public boolean isMaintenance() {
+		return maintenance;
+	}
+
+	public void setMaintenance(boolean maintenance) {
+		this.maintenance = maintenance;
 	}
 
 }

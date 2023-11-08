@@ -1,5 +1,8 @@
 package com.mangoapps.parking_lot.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -15,8 +18,9 @@ public class Ticket {
 	@Column(name = "occupied")
 	private int occupied; 
 
-	@Column(name = "spot_number", nullable = false)
-	private Long spotNumber;
+	@ManyToMany
+	@JoinTable(name = "ticket_spot",joinColumns = @JoinColumn(name = "ticket_id"),inverseJoinColumns = @JoinColumn(name = "spot_id"))
+	private List<ParkingSpot> occupiedSpots = new ArrayList<>();
 
 	public Long getId() {
 		return id;
@@ -42,12 +46,12 @@ public class Ticket {
 		this.occupied = occupied;
 	}
 
-	public Long getSpotNumber() {
-		return spotNumber;
+	public List<ParkingSpot> getOccupiedSpots() {
+		return occupiedSpots;
 	}
 
-	public void setSpotNumber(Long spotNumber) {
-		this.spotNumber = spotNumber;
+	public void setOccupiedSpots(List<ParkingSpot> occupiedSpots) {
+		this.occupiedSpots = occupiedSpots;
 	}
 }
 

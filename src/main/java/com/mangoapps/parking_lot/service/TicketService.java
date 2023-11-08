@@ -5,13 +5,18 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.mangoapps.parking_lot.model.Car;
+import com.mangoapps.parking_lot.model.ParkingSpot;
 import com.mangoapps.parking_lot.model.Ticket;
+import com.mangoapps.parking_lot.repository.ParkingSpotRepository;
 import com.mangoapps.parking_lot.repository.TicketRepository;
 
 @Service
 public class TicketService {
     @Autowired
     private TicketRepository ticketRepository;
+    @Autowired
+    private ParkingSpotRepository parkingSpotRepository;
 
     public List<Ticket> getTicketsByColor(String color) {
         return ticketRepository.findByCar_Color(color);
@@ -34,8 +39,12 @@ public class TicketService {
         ticketRepository.delete(ticket);
     }
 
-    public Ticket getTicketBySpotNumber(Long spotNumber) {
-        return ticketRepository.findBySpotNumber(spotNumber);
+    public Ticket getTicketByCar(Car car) {
+        return ticketRepository.getTicketWithOccupiedSpotsByCar(car);
+    }
+    
+    public List<ParkingSpot> getParkingSpots(Ticket ticket) {
+        return parkingSpotRepository.findByOccupiedContaining(ticket);
     }
 }
 

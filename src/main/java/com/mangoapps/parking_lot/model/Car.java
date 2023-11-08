@@ -12,6 +12,9 @@ public class Car {
 	private Long id;
 	private String registrationNumber;
 	private String color;
+	//private String type;
+	private int size;
+	
 	public Long getId() {
 		return id;
 	}
@@ -29,6 +32,12 @@ public class Car {
 	}
 	public void setColor(String color) {
 		this.color = color;
+	}
+	public int getSize() {
+		return size;
+	}
+	public void setSize(int size) {
+		this.size = size;
 	}
 
 }

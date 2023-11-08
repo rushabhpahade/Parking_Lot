@@ -9,7 +9,7 @@ import com.mangoapps.parking_lot.repository.ParkingSpotRepository;
 import jakarta.annotation.PostConstruct;
 
 @Configuration
-public class ParkingLotIniConfig {
+public class ParkingLotIniConfig {	
 	@Autowired
 	private ParkingSpotRepository parkingSpotRepository;
 
@@ -24,6 +24,7 @@ public class ParkingLotIniConfig {
 		for (int i = 0; i < defaultSize; i++) {
 			ParkingSpot spot = new ParkingSpot();
 			spot.setOccupied(false);
+			spot.setMaintenance(false);
 			parkingSpotRepository.save(spot);
 		}
 	}

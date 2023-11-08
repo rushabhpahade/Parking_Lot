@@ -9,6 +9,6 @@ import com.mangoapps.parking_lot.model.Car;
 @Repository
 public interface CarRepository extends JpaRepository<Car, Long> {
 	List<Car> findByColor(String color);
-	List<Car> findByRegistrationNumber(String registrationNumber);
+	Car findByRegistrationNumber(String registrationNumber);
 }
 

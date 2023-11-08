@@ -17,7 +17,7 @@ public class CarService {
 		return carRepository.findByColor(color);
 	}
 
-	public List<Car> getCarByRegistrationNumber(String registrationNumber) {
+	public Car getCarByRegistrationNumber(String registrationNumber) {
 		return carRepository.findByRegistrationNumber(registrationNumber);
 	}
 	public List<Car> getAllCars() {

@@ -31,12 +31,12 @@ public class CarServiceTests {
         List<Car> cars = new ArrayList<>();
         cars.add(car);
 
-        Mockito.when(carRepository.findByRegistrationNumber(registrationNumber)).thenReturn(cars);
+        Mockito.when(carRepository.findByRegistrationNumber(registrationNumber)).thenReturn(car);
 
-        List<Car> result = carService.getCarByRegistrationNumber(registrationNumber);
+        Car result = carService.getCarByRegistrationNumber(registrationNumber);
 
-        assertEquals(1, result.size());
-        assertEquals(registrationNumber, result.get(0).getRegistrationNumber());
+        
+        assertEquals(registrationNumber, result.getRegistrationNumber());
         // To check if test fails for Wrong registration Number..
         //assertEquals(registrationNumber, "Mh32x4639");
     }
